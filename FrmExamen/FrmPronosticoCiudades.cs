@@ -8,13 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FrmExamen.WSM;
+using ExamenBO;
+using Examen;
 
 
 namespace FrmExamen
 {
     public partial class FrmPronosticoCiudades : Form
-    {
+
+    {   //instancia
+        private PronosticoCiudadesBO bo;
         private WSMeteorologicoClient ws;
+        private List<PRONOSTICO_PORCIUDADESCIUDAD> list;
+
         public FrmPronosticoCiudades()
         {
             InitializeComponent();
@@ -25,7 +31,16 @@ namespace FrmExamen
         {
             ws = new WSMeteorologicoClient("WSMeteorologico");
             Console.WriteLine(ws.pronosticoPorCiudad(new pronosticoCiudad()));
-            
+
+            //inicializar
+            bo = new PronosticoCiudadesBO();
+           list = bo.PronosticoCiudades();
+            MessageBox.Show(list.Count.ToString());
+        }
+
+        private void bunifuDropdown1_onItemSelected(object sender, EventArgs e)
+        {
+          
         }
     }
 }
